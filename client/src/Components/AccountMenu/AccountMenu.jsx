@@ -23,20 +23,26 @@ const AccountMenu = ({ anchorEl, onClose }) => {
   const userId = localStorage.getItem("userId");
 
 
-  useEffect(() => {
-    if (!userId) return;
+useEffect(() => {
+  if (!userId) return;
 
-    const fetchUser = async () => {
-      try {
-        const res = await api.get(`/users/${userId}`);
-        setUser(res.data);
-      } catch (err) {
-        console.error("Failed to load user");
+  const fetchUser = async () => {
+    try {
+      const res = await api.get(`/users/${userId}`);
+      setUser(res.data);
+    } catch (err) {
+      console.error("Failed to load user");
+
+      // 🔥 HANDLE 404 (IMPORTANT)
+      if (err.response?.status === 404) {
+        localStorage.clear();          // remove invalid user
+        navigate("/login", { replace: true }); // redirect
       }
-    };
+    }
+  };
 
-    fetchUser();
-  }, [userId]);
+  fetchUser();
+}, [userId, navigate]);
 
   const handleLogout = () => {
     localStorage.removeItem("userId");

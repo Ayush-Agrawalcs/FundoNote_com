@@ -9,6 +9,7 @@ import Notes from "./Components/Notes/Notes";
 import Archive from "./Components/Archive/Archive";
 import Trash from "./Components/Trash/Trash";
 
+
 import ProtectedRoute from "./Routes/ProtectedRoutes";
 
 const router = createBrowserRouter([
