@@ -81,27 +81,38 @@ class AuthService:
 
     # ✅ SEND OTP
     async def send_otp(self, email, db):
+        print("=== SEND OTP CALLED ===")
+        print("EMAIL:", email)
+
         user = db.query(User).filter(User.email == email).first()
 
         if not user:
+            print("USER NOT FOUND")
             raise HTTPException(status_code=404, detail="User not found")
 
         otp = generate_otp()
+        print("OTP GENERATED:", otp)
 
         user.otp = otp
         user.otp_expiry = datetime.utcnow() + timedelta(minutes=5)
-
         db.commit()
 
-        message = MessageSchema(
-            subject="Fundoo Notes OTP",
-            recipients=[email],
-            body=f"Your OTP is {otp}",
-            subtype="plain"
-        )
+        try:
+            message = MessageSchema(
+                subject="Fundoo Notes OTP",
+                recipients=[email],
+                body=f"Your OTP is {otp}",
+                subtype="plain"
+            )
 
-        fm = FastMail(conf)
-        await fm.send_message(message)
+            fm = FastMail(conf)
+
+            print("SENDING EMAIL...")
+            await fm.send_message(message)
+            print("EMAIL SENT SUCCESSFULLY ✅")
+
+        except Exception as e:
+            print("EMAIL ERROR ❌:", str(e))
 
         return {"message": "OTP sent successfully"}
 
