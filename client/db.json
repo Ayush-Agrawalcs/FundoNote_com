@@ -1,0 +1,76 @@
+{
+  "notes": [
+    {
+      "id": "a48c",
+      "use": "f605",
+      "title": "Hello",
+      "description": "World",
+      "color": "#a7ffeb",
+      "isArchived": false,
+      "isTrashed": false
+    },
+    {
+      "id": "5960",
+      "use": "f605",
+      "title": "How are You Dude",
+      "description": "Dude",
+      "color": "#f28b82",
+      "isArchived": false,
+      "isTrashed": false
+    },
+    {
+      "id": "c7a1",
+      "use": "f605",
+      "title": "Hello",
+      "description": "World",
+      "color": "#aecbfa",
+      "isArchived": false,
+      "isTrashed": false
+    },
+    {
+      "id": "1c1c",
+      "use": "f605",
+      "title": "sdfg",
+      "description": "",
+      "color": "#fff475",
+      "isArchived": false,
+      "isTrashed": false
+    },
+    {
+      "id": "5bd9",
+      "use": "f605",
+      "title": "hello Doodle",
+      "description": "",
+      "color": "#f28b82",
+      "isArchived": false,
+      "isTrashed": false
+    },
+    {
+      "id": "9e54",
+      "use": "f605",
+      "title": "Hello",
+      "description": "Doodles",
+      "color": "#ccff90",
+      "isArchived": false,
+      "isTrashed": false
+    }
+  ],
+  "users": [
+    {
+      "id": "f605",
+      "firstName": "Divyansh",
+      "lastName": "Singh",
+      "email": "divyanshsinghh2304@gmail.com",
+      "password": "123456789",
+      "service": "advance"
+    },
+    {
+      "id": "91ac",
+      "firstName": "Divyansh",
+      "lastName": "Singh",
+      "email": "a@gmail.com",
+      "password": "12345678",
+      "service": "advance"
+    }
+  ]
+}

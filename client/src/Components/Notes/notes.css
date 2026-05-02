@@ -1,0 +1,16 @@
+.notes-masonry-grid {
+    display: flex;
+    margin-left: -16px;
+    /* gutter size */
+    width: auto;
+}
+
+.notes-masonry-column {
+    padding-left: 16px;
+    /* gutter size */
+    background-clip: padding-box;
+}
+
+.notes-masonry-column>div {
+    margin-bottom: 16px;
+}
