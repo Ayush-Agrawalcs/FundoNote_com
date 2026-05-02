@@ -196,3 +196,4 @@ DETAIL:  Key (user_id)=(0) is not present in table "users".
 2026-05-02T05:20:47.700486+0530 | INFO | Note deleted successfully
 2026-05-02T05:20:48.507712+0530 | INFO | Note deleted successfully
 2026-05-02T05:20:50.678661+0530 | INFO | Note deleted successfully
+2026-05-02T13:45:29.329886+0530 | INFO | Note created successfully

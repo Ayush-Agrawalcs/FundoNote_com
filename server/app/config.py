@@ -5,7 +5,12 @@ load_dotenv()
 
 class Config:
     def __init__(self):
-        load_dotenv()
-        self.DATABASE_URL=os.getenv("DATABASE_URL")
-        
-config=Config()
+        self.DATABASE_URL = os.getenv("DATABASE_URL")
+
+        # 🔥 Fix for Render
+        if self.DATABASE_URL and self.DATABASE_URL.startswith("postgres://"):
+            self.DATABASE_URL = self.DATABASE_URL.replace(
+                "postgres://", "postgresql://"
+            )
+
+config = Config()
