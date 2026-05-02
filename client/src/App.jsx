@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
-import Otp from "./Pages/Otp";
 
 import Notes from "./Components/Notes/Notes";
 import Archive from "./Components/Archive/Archive";
