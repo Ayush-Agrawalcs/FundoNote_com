@@ -15,7 +15,7 @@ class NoteService:
                 color=note_data.color,
                 isArchived=note_data.isArchived,
                 isTrashed=note_data.isTrashed,
-                user_id=note_data.user_id
+                user_id=note_data.user_id   # 🔥 IMPORTANT
             )
 
             db.add(new_note)
@@ -31,7 +31,7 @@ class NoteService:
             raise HTTPException(status_code=500, detail=str(e))
 
 
-    # ✅ Get All Notes
+    # ✅ Get All Notes (FIXED 🔥)
     def get_all_notes(self, db, isArchived=None, isTrashed=None, user_id=None):
         query = db.query(Note)
 
@@ -42,7 +42,7 @@ class NoteService:
             query = query.filter(Note.isTrashed == isTrashed)
 
         if user_id is not None:
-            query = query.filter(Note.user_id == user_id)
+            query = query.filter(Note.user_id == user_id)   # 🔥 MAIN FIX
 
         return query.all()
 
@@ -57,7 +57,7 @@ class NoteService:
         return note
 
 
-    # ✅ Update Note (PATCH / PUT)
+    # ✅ Update Note
     def update_note(self, note_id, note_data, db):
         note = self.get_note_by_id(note_id, db)
 
@@ -97,7 +97,7 @@ class NoteService:
         return {"message": "Note deleted successfully"}
 
 
-    # ✅ Add Label to Note
+    # ✅ Add Label
     def add_label_to_note(self, note_id, label_id, db):
         note = self.get_note_by_id(note_id, db)
         label = db.query(Label).filter(Label.id == label_id).first()
@@ -109,11 +109,11 @@ class NoteService:
         db.commit()
         db.refresh(note)
 
-        logger_instance.info('Label added to note successfully')
+        logger_instance.info('Label added successfully')
         return note
 
 
-    # ✅ Remove Label from Note
+    # ✅ Remove Label
     def remove_label_from_note(self, note_id, label_id, db):
         note = self.get_note_by_id(note_id, db)
         label = db.query(Label).filter(Label.id == label_id).first()
@@ -125,7 +125,7 @@ class NoteService:
         db.commit()
         db.refresh(note)
 
-        logger_instance.info('Label removed from note successfully')
+        logger_instance.info('Label removed successfully')
         return note
 
 

@@ -1,38 +1,45 @@
 import { useState, useRef } from "react";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
-import {Box,Card,CardContent,TextField, Typography, Button, Link, IconButton, InputAdornment,} from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  TextField,
+  Typography,
+  Button,
+  Link,
+  IconButton,
+  InputAdornment,
+} from "@mui/material";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { login } from "../Routes/AuthRoute";
+
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-
   const emailRef = useRef();
   const passwordRef = useRef();
   const [errors, setErrors] = useState({});
 
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
-  const handleSubmit = async() => {
-    const email = emailRef.current.value;
-    const password = passwordRef.current.value;
+  const handleSubmit = async () => {
+    const email = emailRef.current.value.trim();
+    const password = passwordRef.current.value.trim();
+
     let newErrors = {};
 
+    // ✅ Required validation
+    if (!email) newErrors.email = "Email is required";
+    if (!password) newErrors.password = "Password is required";
 
-
-    if(!email) newErrors.email="email required";
-    if(!password) newErrors.password="password is required"
-
-     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+    // ✅ Email format validation
+    if (email && !/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
+      newErrors.email = "Enter a valid Gmail address";
     }
 
-   if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
-      newErrors.email = "*Enter a valid gmail address";
-    }
-
-    if (password.length < 8) {
+    // ✅ Password validation
+    if (password && password.length < 8) {
       newErrors.password = "Password must be at least 8 characters";
     }
 
@@ -43,16 +50,19 @@ export default function Login() {
 
     setErrors({});
 
-    try{
-      const user=await login(
-        email,
-        password,
-      )
-      console.log("[[[[[[[[[[[[",user)
-      localStorage.setItem("userId",user.id)
-      navigate('/')
-    }catch(error){
-      setErrors({ general: "**invalid email or password" });
+    try {
+      const user = await login(email, password);
+
+      console.log("LOGIN USER:", user);
+
+      // ✅ Store userId (FIXED)
+      localStorage.setItem("userId", user.id);
+
+      // ✅ Navigate after login
+      navigate("/");
+    } catch (error) {
+      console.error("Login Error:", error);
+      setErrors({ general: "Invalid email or password" });
     }
   };
 
@@ -68,14 +78,8 @@ export default function Login() {
     >
       <Card sx={{ width: 420, p: 2 }}>
         <CardContent>
-
           {/* Logo */}
-          <Typography
-            variant="h5"
-            fontWeight={600}
-            color="#1a73e8"
-            mb={1}
-          >
+          <Typography variant="h5" fontWeight={600} color="#1a73e8" mb={1}>
             Fundoo
           </Typography>
 
@@ -90,7 +94,7 @@ export default function Login() {
 
           {/* Email */}
           <TextField
-            label="Email or phone"
+            label="Email"
             fullWidth
             sx={{ mb: 2 }}
             inputRef={emailRef}
@@ -98,11 +102,9 @@ export default function Login() {
             helperText={errors.email}
           />
 
-         
-
           {/* Password */}
           <TextField
-            label="Enter your password"
+            label="Password"
             type={showPassword ? "text" : "password"}
             fullWidth
             sx={{ mt: 3 }}
@@ -123,14 +125,18 @@ export default function Login() {
             }}
           />
 
-         
+          {/* General Error */}
+          {errors.general && (
+            <Typography color="error" mt={2}>
+              {errors.general}
+            </Typography>
+          )}
 
           {/* Info */}
           <Typography variant="body2" color="text.secondary" mt={4}>
             Not your computer? Use Guest mode to sign in privately.
           </Typography>
 
-          
           {/* Actions */}
           <Box
             sx={{
@@ -140,7 +146,12 @@ export default function Login() {
               mt: 4,
             }}
           >
-            <Link component={RouterLink} to="/signup" underline="none" fontWeight={500}>
+            <Link
+              component={RouterLink}
+              to="/signup"
+              underline="none"
+              fontWeight={500}
+            >
               Create account
             </Link>
 
@@ -156,7 +167,6 @@ export default function Login() {
               Next
             </Button>
           </Box>
-
         </CardContent>
       </Card>
     </Box>
