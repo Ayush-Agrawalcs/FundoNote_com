@@ -5,12 +5,14 @@ load_dotenv()
 
 class Config:
     def __init__(self):
-        self.DATABASE_URL = os.getenv("DATABASE_URL")
+        db_url = os.getenv("DATABASE_URL")
 
-        # 🔥 Fix for Render
-        if self.DATABASE_URL and self.DATABASE_URL.startswith("postgres://"):
-            self.DATABASE_URL = self.DATABASE_URL.replace(
-                "postgres://", "postgresql://"
-            )
+        if not db_url:
+            raise ValueError("DATABASE_URL is not set")
+
+        if db_url.startswith("postgres://"):
+            db_url = db_url.replace("postgres://", "postgresql://")
+
+        self.DATABASE_URL = db_url
 
 config = Config()
