@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-    baseURL: "http://127.0.0.1:8000", // your FastAPI server
+    baseURL: "https://fundonote-com-7.onrender.com", // ✅ your deployed backend
     headers: {
         "Content-Type": "application/json",
     },
