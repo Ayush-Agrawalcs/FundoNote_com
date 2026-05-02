@@ -10,8 +10,3 @@ class User(Base):
     email = Column(String(100), unique=True, index=True, nullable=False)
     password = Column(String(255), nullable=False)
     service = Column(String(50), nullable=True)
-
-    # 🔥 NEW FIELDS FOR OTP
-    otp = Column(String(6), nullable=True)
-    otp_expiry = Column(DateTime, nullable=True)
-    is_verified = Column(Boolean, default=False)
