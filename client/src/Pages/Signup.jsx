@@ -30,69 +30,49 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
-    const firstName = firstNameRef.current.value.trim();
-    const lastName = lastNameRef.current.value.trim();
-    const email = emailRef.current.value.trim();
-    const password = passwordRef.current.value;
-    const confirmPassword = confirmPasswordRef.current.value;
+  const firstName = firstNameRef.current.value.trim();
+  const lastName = lastNameRef.current.value.trim();
+  const email = emailRef.current.value.trim();
+  const password = passwordRef.current.value;
+  const confirmPassword = confirmPasswordRef.current.value;
 
-    let newErrors = {};
+  let newErrors = {};
 
-    if (!firstName) newErrors.firstName = "*first Name is required";
-    if (!email) newErrors.email = "*email is required";
-    if (!password) newErrors.password = "*password is required";
-    if (!confirmPassword)
-      newErrors.confirmPassword = "*confirm password is required";
+  if (!firstName) newErrors.firstName = "*first Name is required";
+  if (!email) newErrors.email = "*email is required";
+  if (!password) newErrors.password = "*password is required";
+  if (!confirmPassword)
+    newErrors.confirmPassword = "*confirm password is required";
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors);
+    return;
+  }
+
+  setLoading(true);
+
+  try {
+    await signup({
+      firstName,
+      lastName,
+      email,
+      password,
+      service: "advance",
+    });
+
+    // 🔥 NAVIGATE TO OTP PAGE
+    navigate("/otp", { state: { email } });
+
+  } catch (err) {
+    if (err.message === "EMAIL_EXISTS") {
+      setErrors({ email: "Email already registered" });
+    } else {
+      alert("Signup failed");
     }
-    newErrors = {};
-
-    if (!/^[A-Za-z]{2,}$/.test(firstName))
-      newErrors.firstName = "*enter a valid first name";
-
-    if (!/^[A-Za-z]{2,}$/.test(lastName))
-      newErrors.lastName = "*enter a valid last name";
-
-    if (!/^[a-zA-Z0-9._%+-]+@gmail\.com$/.test(email)) {
-      newErrors.email = "*not a valid gmail address";
-    }
-
-    if (password.length < 8)
-      newErrors.password = "*eassword must be at least 8 characters";
-
-    if (password !== confirmPassword)
-      newErrors.confirmPassword = "*passwords do not match";
-
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    setLoading(true);
-
-    try {
-      await signup({
-        firstName,
-        lastName,
-        email,
-        password,
-        service: "advance",
-      });
-      navigate("/login");
-    } catch (err) {
-      console.log(err)
-      if (err.message === "EMAIL_EXISTS") {
-        setErrors({ email: "Email already registered" });
-      } else {
-        alert("Signup failed");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <Box

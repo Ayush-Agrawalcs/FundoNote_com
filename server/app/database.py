@@ -1,6 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker,declarative_base
-from app.config import config
+import importlib.util
+_spec = importlib.util.spec_from_file_location("app.config", "app/config.py")
+_config = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_config)
+config = _config.config
 
 def singleton(cls):
     instance={}

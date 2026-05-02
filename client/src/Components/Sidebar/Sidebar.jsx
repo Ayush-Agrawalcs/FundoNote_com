@@ -22,8 +22,6 @@ export default function Sidebar({ open }) {
 
   const menuItems = [
     { text: "Notes", icon: <LightbulbOutlinedIcon />, path: "/" },
-    { text: "Reminders", icon: <NotificationsNoneOutlinedIcon />, path: "/reminders" },
-    { text: "Edit", icon: <EditIcon />, path: "/edit" },
     { text: "Archive", icon: <ArchiveOutlinedIcon />, path: "/archive" },
     { text: "Trash", icon: <DeleteOutlineOutlinedIcon />, path: "/trash" },
   ];

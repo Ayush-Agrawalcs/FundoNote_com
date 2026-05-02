@@ -3,12 +3,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./Pages/Dashboard";
 import Signup from "./Pages/Signup";
 import Login from "./Pages/Login";
+import Otp from "./Pages/Otp";
 
 import Notes from "./Components/Notes/Notes";
-import Reminders from "./Components/Reminders/Reminders";
 import Archive from "./Components/Archive/Archive";
 import Trash from "./Components/Trash/Trash";
-import Edit from "./Components/Edit/Edit";
 
 import ProtectedRoute from "./Routes/ProtectedRoutes";
 
@@ -23,14 +22,6 @@ const router = createBrowserRouter([
           {
             index: true,
             element: <Notes />,
-          },
-          {
-            path: "reminders",
-            element: <Reminders />,
-          },
-          {
-            path: "edit",
-            element: <Edit />,
           },
           {
             path: "archive",
@@ -49,6 +40,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/otp",
+    element: <Otp />,
   },
   {
     path: "/login",

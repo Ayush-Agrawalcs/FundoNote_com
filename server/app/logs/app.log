@@ -197,3 +197,52 @@ DETAIL:  Key (user_id)=(0) is not present in table "users".
 2026-05-02T05:20:48.507712+0530 | INFO | Note deleted successfully
 2026-05-02T05:20:50.678661+0530 | INFO | Note deleted successfully
 2026-05-02T13:45:29.329886+0530 | INFO | Note created successfully
+2026-05-02T15:33:55.082521+0530 | ERROR | Error creating note: (psycopg2.errors.ForeignKeyViolation) insert or update on table "notes" violates foreign key constraint "notes_user_id_fkey"
+DETAIL:  Key (user_id)=(6) is not present in table "users".
+
+[SQL: INSERT INTO notes (title, description, color, "isArchived", "isTrashed", user_id, created_at, updated_at) VALUES (%(title)s, %(description)s, %(color)s, %(isArchived)s, %(isTrashed)s, %(user_id)s, %(created_at)s, %(updated_at)s) RETURNING notes.id]
+[parameters: {'title': 'hello', 'description': '', 'color': '#ffffff', 'isArchived': False, 'isTrashed': False, 'user_id': 6, 'created_at': datetime.datetime(2026, 5, 2, 10, 3, 54, 851860), 'updated_at': datetime.datetime(2026, 5, 2, 10, 3, 54, 851910)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-05-02T15:44:54.378685+0530 | ERROR | Error creating note: (psycopg2.errors.ForeignKeyViolation) insert or update on table "notes" violates foreign key constraint "notes_user_id_fkey"
+DETAIL:  Key (user_id)=(6) is not present in table "users".
+
+[SQL: INSERT INTO notes (title, description, color, "isArchived", "isTrashed", user_id, created_at, updated_at) VALUES (%(title)s, %(description)s, %(color)s, %(isArchived)s, %(isTrashed)s, %(user_id)s, %(created_at)s, %(updated_at)s) RETURNING notes.id]
+[parameters: {'title': '', 'description': 'yhubh', 'color': '#ffffff', 'isArchived': False, 'isTrashed': False, 'user_id': 6, 'created_at': datetime.datetime(2026, 5, 2, 10, 14, 54, 1738), 'updated_at': datetime.datetime(2026, 5, 2, 10, 14, 54, 1769)}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+2026-05-02T15:46:58.821023+0530 | INFO | User created with ID: 3
+2026-05-02T15:47:05.252500+0530 | INFO | User authenticated: 3
+2026-05-02T15:47:17.783097+0530 | INFO | Note created successfully
+2026-05-02T15:47:26.707737+0530 | INFO | Note updated successfully
+2026-05-02T15:47:40.679381+0530 | INFO | User authenticated: 2
+2026-05-02T15:47:49.734888+0530 | INFO | Note updated successfully
+2026-05-02T15:48:09.521565+0530 | INFO | User authenticated: 3
+2026-05-02T15:48:21.138324+0530 | INFO | Note updated successfully
+2026-05-02T15:48:25.859587+0530 | INFO | Note updated successfully
+2026-05-02T16:48:22.302508+0530 | INFO | User created with ID: 1
+2026-05-02T16:50:03.853483+0530 | INFO | User authenticated: 1
+2026-05-02T17:02:38.633544+0530 | INFO | User created with ID: 2
+2026-05-02T17:04:35.047644+0530 | INFO | User created with ID: 3
+2026-05-02T17:05:25.042704+0530 | INFO | User created with ID: 4
+2026-05-02T17:06:34.016208+0530 | INFO | User authenticated: 1
+2026-05-02T17:08:05.431936+0530 | INFO | User created with ID: 5
+2026-05-02T17:30:54.369538+0530 | INFO | User created with ID: 6
+2026-05-02T17:49:36.747728+0530 | INFO | User authenticated: 1
+2026-05-02T17:49:36.822967+0530 | INFO | User authenticated: 1
+2026-05-02T17:49:36.850681+0530 | INFO | User authenticated: 1
+2026-05-02T17:49:36.855094+0530 | INFO | User authenticated: 1
+2026-05-02T18:02:15.545220+0530 | INFO | User created with ID: 1
+2026-05-02T18:10:20.955052+0530 | INFO | User created with ID: 1
+2026-05-02T18:17:19.852196+0530 | INFO | User authenticated: 1
+2026-05-02T18:17:41.934639+0530 | INFO | Note created successfully
+2026-05-02T18:18:01.368148+0530 | INFO | Note updated successfully
+2026-05-02T18:18:05.938086+0530 | INFO | Note updated successfully
+2026-05-02T18:18:16.052196+0530 | INFO | Note updated successfully
+2026-05-02T18:18:21.980684+0530 | INFO | Note updated successfully
+2026-05-02T18:18:39.324514+0530 | INFO | Note updated successfully
+2026-05-02T18:18:43.440677+0530 | INFO | Note updated successfully
+2026-05-02T18:18:47.377682+0530 | INFO | Note updated successfully
+2026-05-02T18:20:16.092188+0530 | INFO | Note updated successfully
+2026-05-02T18:22:32.786888+0530 | INFO | Note updated successfully
+2026-05-02T18:22:41.570702+0530 | INFO | Note updated successfully
+2026-05-02T18:22:41.775879+0530 | INFO | Note updated successfully
+2026-05-02T18:22:52.446617+0530 | INFO | Note deleted successfully
